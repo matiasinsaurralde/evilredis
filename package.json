@@ -1,0 +1,21 @@
+{
+  "name": "evilredis",
+  "version": "1.0.0",
+  "description": "an evil tool",
+  "main": "index.js",
+  "dependencies": {
+    "cidr-js": "^2.2.1",
+    "ipv4list": "^1.0.1",
+    "redis": "^0.12.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matias Insaurralde",
+  "license": "ISC",
+  "keywords": [
+    "redis",
+    "security"
+  ]
+}
