@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var CIDR = require('cidr-js'),
     Redis = require('redis'),
     fs = require('fs'),
