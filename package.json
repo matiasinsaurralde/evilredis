@@ -3,8 +3,11 @@
   "version": "1.0.1",
   "description": "an evil tool",
   "main": "index.js",
-  "bin": { "evilredis": "index.js" },
+  "bin": {
+    "evilredis": "index.js"
+  },
   "dependencies": {
+    "async": "^1.5.0",
     "cidr-js": "^2.2.1",
     "ipv4list": "^1.0.1",
     "redis": "^0.12.1"
