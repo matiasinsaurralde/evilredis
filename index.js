@@ -66,6 +66,7 @@ hosts.forEach( function( host, index ) {
               });
             });
           }], function( err, callback ) {
+              redis.flushall();
               console.log( prefix, 'Vulnerable, try ssh...'  );
           });
         };
