@@ -1,6 +1,7 @@
 evilredis
 =========
 Small script for doing evil stuff to Redis servers
+(for educational purposes only)
 
 ## usage
 ```
