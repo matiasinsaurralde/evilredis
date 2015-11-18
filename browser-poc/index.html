@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Browser scan, proof of concept</title>
+</head>
+<body>
+  <p>ws test</p>
+
+  <script>
+    window.onload = function() {
+      var ws = new WebSocket('ws://127.0.0.1:6379');
+      ws.onopen = function(evt) { alert("Connection open ..."); };
+      ws.onmessage = function(evt) { alert( "Received Message: " + evt.data); };
+      ws.onclose = function(evt) {
+        console.log('close');
+      };
+    };
+  </script>
+</body>
+</html>
