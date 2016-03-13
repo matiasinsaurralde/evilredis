@@ -24,3 +24,7 @@ Then:
 
  USE AT YOUR OWN RISK!
  ```
+
+## license
+
+[mit](https://github.com/matiasinsaurralde/evilredis/blob/master/LICENSE)
