@@ -16,8 +16,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Matias Insaurralde",
-  "license": "ISC",
+  "author": "Matias Insaurralde <matias@insaurral.de>",
+  "license": "MIT",
   "keywords": [
     "redis",
     "security",
