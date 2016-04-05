@@ -8,9 +8,9 @@
   },
   "dependencies": {
     "async": "^1.5.0",
-    "cidr-js": "^2.2.1",
+    "cidr-js": "^2.3.1",
     "ipv4list": "^1.0.1",
-    "redis": "^0.12.1"
+    "redis": "^2.5.3"
   },
   "devDependencies": {},
   "scripts": {
